@@ -9,7 +9,8 @@ import {
     Snackbar,
     Avatar, Card, FixedLayout, Textarea, FormLayoutGroup, FormItem, Button
 } from '@vkontakte/vkui'
-import { Icon16Done} from '@vkontakte/icons'
+import {Icon16Done} from '@vkontakte/icons'
+import {evaluate} from 'mathjs'
 
 function HomePanelBase({router}) {
     // eslint-disable-next-line
@@ -64,11 +65,13 @@ function HomePanelBase({router}) {
     }
 
     function calculator() {
-        let data = document.getElementById('num').value;
-        //document.getElementById('num').value = Number(Math.evaluate(data))
-        console.log(math.evaluate(1 + 1))
-
-
+        try {
+            let data = document.getElementById('num').value;
+            document.getElementById('num').value += ' = ' + evaluate(data)
+        }
+        catch (err) {
+            document.getElementById('num').value = "ERROR"
+        }
     }
 
     return (
@@ -108,6 +111,11 @@ function HomePanelBase({router}) {
                                     </FormItem>
                                     <FormItem>
                                         <Button className="btn" size="l" onClick={() => document.getElementById('num').value += ' / '}>÷</Button>
+                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value = ''}>C</Button>
+                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value = ' ('}>(</Button>
+                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value = ') '}>)</Button>
+                                    </FormItem>
+                                    <FormItem>
                                         <Button className="btn1" size="l" onClick={() => calculator()}>Enter</Button>
                                     </FormItem>
                                 </FormLayoutGroup>

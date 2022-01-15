@@ -1,5 +1,5 @@
 {
-  "name": "vkmaboilerplate",
+  "name": "calculator",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -26,6 +26,7 @@
     "eruda": "^2.4.1",
     "eruda-code": "^2.0.0",
     "eruda-dom": "^2.0.0",
+    "mathjs": "^10.0.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-router-vkminiapps": "^1.2.3"

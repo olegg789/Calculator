@@ -81,7 +81,8 @@ html {
 }
 
 .btn1 {
-    width: 170px
+    width: 220px;
+    margin-left: 5px;
 }
 
 .ekran {
