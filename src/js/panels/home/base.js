@@ -112,8 +112,8 @@ function HomePanelBase({router}) {
                                     <FormItem>
                                         <Button className="btn" size="l" onClick={() => document.getElementById('num').value += ' / '}>÷</Button>
                                         <Button className="btn" size="l" onClick={() => document.getElementById('num').value = ''}>C</Button>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value = ' ('}>(</Button>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value = ') '}>)</Button>
+                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += ' ('}>(</Button>
+                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += ') '}>)</Button>
                                     </FormItem>
                                     <FormItem>
                                         <Button className="btn1" size="l" onClick={() => calculator()}>Enter</Button>
