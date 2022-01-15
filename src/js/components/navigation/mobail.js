@@ -4,7 +4,10 @@ import {
 	Tabbar,
 	TabbarItem
 } from '@vkontakte/vkui';
-import {Icon28KeyboardOutline} from '@vkontakte/icons';
+import {
+	Icon28KeyboardOutline,
+	Icon28WriteOutline,
+} from '@vkontakte/icons';
 
 function MobailNavigation({setActiveView, router}) {
 
@@ -25,7 +28,12 @@ function MobailNavigation({setActiveView, router}) {
 	        onClick={openView}
 	        text='Калькулятор'
 	      ><Icon28KeyboardOutline/></TabbarItem>
-
+		  <TabbarItem
+			  data-id='profile'
+			  selected={router.activeView === 'profile'}
+			  onClick={openView}
+			  text='Конвертор'
+		  ><Icon28WriteOutline/></TabbarItem>
 	    </Tabbar>
 	)
 }

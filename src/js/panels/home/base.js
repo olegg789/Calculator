@@ -64,10 +64,19 @@ function HomePanelBase({router}) {
         )
     }
 
+    function print(num) {
+        try {
+            document.getElementById('num').value += num
+        }
+        catch(err) {
+            console.log(err)
+        }
+    }
+
     function calculator() {
         try {
             let data = document.getElementById('num').value;
-            document.getElementById('num').value += ' = ' + evaluate(data)
+            document.getElementById('num').value = evaluate(data)
         }
         catch (err) {
             document.getElementById('num').value = "ERROR"
@@ -92,30 +101,32 @@ function HomePanelBase({router}) {
                             <Div>
                                 <FormLayoutGroup>
                                     <FormItem>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += 1}>1</Button>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += 2}>2</Button>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += 3}>3</Button>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += ' + '}>+</Button>
+                                        <Button className="btn" size="l" onClick={() => print(1)}>1</Button>
+                                        <Button className="btn" size="l" onClick={() => print(2)}>2</Button>
+                                        <Button className="btn" size="l" onClick={() => print(3)}>3</Button>
+                                        <Button className="btn" size="l" onClick={() => print(' + ')}>+</Button>
                                     </FormItem>
                                     <FormItem>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += 4}>4</Button>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += 5}>5</Button>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += 6}>6</Button>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += ' - '}>-</Button>
+                                        <Button className="btn" size="l" onClick={() => print(4)}>4</Button>
+                                        <Button className="btn" size="l" onClick={() => print(5)}>5</Button>
+                                        <Button className="btn" size="l" onClick={() => print(6)}>6</Button>
+                                        <Button className="btn" size="l" onClick={() => print(' - ')}>-</Button>
                                     </FormItem>
                                     <FormItem>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += 7}>7</Button>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += 8}>8</Button>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += 9}>9</Button>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += ' * '}>×</Button>
+                                        <Button className="btn" size="l" onClick={() => print(7)}>7</Button>
+                                        <Button className="btn" size="l" onClick={() => print(8)}>8</Button>
+                                        <Button className="btn" size="l" onClick={() => print(9)}>9</Button>
+                                        <Button className="btn" size="l" onClick={() => print(' * ')}>×</Button>
                                     </FormItem>
                                     <FormItem>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += ' / '}>÷</Button>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value = ''}>C</Button>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += ' ('}>(</Button>
-                                        <Button className="btn" size="l" onClick={() => document.getElementById('num').value += ') '}>)</Button>
+                                        <Button className="btn" size="l" onClick={() => print(' / ')}>÷</Button>
+                                        <Button className="btn" size="l" onClick={() => print(0)}>0</Button>
+                                        <Button className="btn" size="l" onClick={() => print(' (')}>(</Button>
+                                        <Button className="btn" size="l" onClick={() => print(') ')}>)</Button>
                                     </FormItem>
                                     <FormItem>
+                                        <Button className="btn" size='l' onClick={() => document.getElementById('num').value = ''}>C</Button>
+                                        <Button className="btn" size='l' onClick={() => print('.')}>.</Button>
                                         <Button className="btn1" size="l" onClick={() => calculator()}>Enter</Button>
                                     </FormItem>
                                 </FormLayoutGroup>

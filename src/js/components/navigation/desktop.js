@@ -11,7 +11,7 @@ import {
 } from '@vkontakte/vkui';
 import {
     Icon28KeyboardOutline,
-    Icon28Profile
+    Icon28WriteOutline
 } from '@vkontakte/icons';
 
 function DesktopNavigation({hasHeader, setActiveView, router}) {
@@ -34,10 +34,10 @@ function DesktopNavigation({hasHeader, setActiveView, router}) {
             data-id='profile'
             onClick={setActiveView}
             disabled={router.activeView === 'profile'}
-            before={<Icon28Profile/>}
+            before={<Icon28WriteOutline/>}
             className={router.activeView === 'profile' ? 'activeViewCell' : ''}
           >
-            ...
+              Конвертор
           </Cell>
         </Group>
 

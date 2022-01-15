@@ -1,94 +1,100 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import {
-    PanelHeader,
-    Gradient,
-    Avatar,
-    Title,
-    Text,
-    Button,
-    ScreenSpinner,
     Group,
-    Header,
-    SimpleCell,
-    CellButton
+    PanelHeader,
+    FormItem,
+    NativeSelect,
+    Div,
+    Input,
+    IconButton, Button, Header, Card,
 } from "@vkontakte/vkui";
 import {
-    Icon28SchoolOutline,
-    Icon28AddOutline
+    Icon16Clear
 } from '@vkontakte/icons';
-import bridge from '@vkontakte/vk-bridge';
-
-let isInfoUser = false
-let infoUser = ['Загрузка...']
+import {evaluate} from "mathjs";
 
 function ProfilePanelBase({isDesktop, router}) {
-    const [infoUsers, setInfoUser] = useState(infoUser)
 
-    useEffect(() => {
-        if (!isInfoUser) {
-            getInfoUser()
+    const textInput = React.createRef();
+    const clear = () => (textInput.current.value = "");
+
+    function calc() {
+        try {
+            let from = document.getElementById('from').value;
+            let num = document.getElementById('num').value;
+            let to = document.getElementById('to').value;
+
+            let test1 = evaluate(num + ' ' + from + ' to ' + to)
+            document.getElementById('result').innerHTML = test1
         }
-    })
-
-    async function getInfoUser() {
-        router.toPopout(<ScreenSpinner/>)
-
-        let user_info = await bridge.send('VKWebAppGetUserInfo');
-        infoUser[0] = user_info.first_name + ' ' + user_info.last_name
-        infoUser.push(user_info.photo_200)
-        infoUser.push(user_info.id)
-
-        setInfoUser(infoUser)
-        isInfoUser = true
-
-        router.toPopout()
+        catch(err) {
+            document.getElementById('result').innerHTML = 'ERROR'
+        }
     }
 
     return (
         <>
-            <PanelHeader separator={false}>Профиль</PanelHeader>
-            <Group>
-                <Gradient className={isDesktop ? 'ProfileUserWeb' : 'ProfileUserMobail'}>
-                    <Avatar size={96} src={infoUsers[1]}/>
-
-                    <Title 
-                        className='NameUser'
-                        level="2" 
-                        weight="medium"
-                    >
-                        {infoUsers[0]}
-                    </Title>
-
-                    <Text className='SubheaderUser'>
-                        Какой-нибудь статус человека...
-                    </Text>
-
-                    <Button 
-                        size="m" 
-                        mode="secondary" 
-                        href={`https://vk.com/id${infoUsers[2]}`} 
-                        target='_blank' 
-                    >
-                        Перейти на страницу
-                    </Button>
-                </Gradient>
-
-                <Header>Учебные заведения и классы</Header>
-
-                <SimpleCell 
-                    before={<Icon28SchoolOutline/>} 
-                    description="Екатеринбург"
-                >
-                    Школа №180
-                </SimpleCell>
-
-                <CellButton 
-                    before={<Icon28AddOutline />}
-                >
-                    Добавить учебное заведение
-                </CellButton>
-            </Group>
+            <PanelHeader separator={false}>Конвертор</PanelHeader>
+            <Div>Позволит перевести из одной единицы измерения в другую</Div>
+                <Group mode='card'>
+                        <FormItem top="Из...">
+                            <NativeSelect id='from' placeholder='Не выбрано'>
+                                <option value="cm">Сантиметры</option>
+                                <option value="m">Метры</option>
+                                <option value="km">Километры</option>
+                                <option value='g'>Граммы</option>
+                                <option value="kg">Килограммы</option>
+                                <option value="ton">Тонны</option>
+                                <option value="s">Секунды</option>
+                                <option value='minute'>Минуты</option>
+                                <option value='hour'>Часы</option>
+                                <option value='day'>Дни</option>
+                            </NativeSelect>
+                        </FormItem>
+                        <Div>
+                            <Input
+                                getRef={textInput}
+                                type="number"
+                                id='num'
+                                placeholder="Введите число..."
+                                after={
+                                    <IconButton
+                                        hoverMode="opacity"
+                                        aria-label="Очистить поле"
+                                        onClick={clear}
+                                    >
+                                        <Icon16Clear />
+                                    </IconButton>
+                                }
+                            />
+                        </Div>
+                        <Div></Div>
+                        <FormItem top="В...">
+                            <NativeSelect id='to' placeholder='Не выбрано'>
+                                <option value="cm">Сантиметры</option>
+                                <option value="m">Метры</option>
+                                <option value="km">Километры</option>
+                                <option value='g'>Граммы</option>
+                                <option value="kg">Килограммы</option>
+                                <option value="ton">Тонны</option>
+                                <option value="s">Секунды</option>
+                                <option value='minute'>Минуты</option>
+                                <option value='hour'>Часы</option>
+                                <option value='day'>Дни</option>
+                            </NativeSelect>
+                        </FormItem>
+                        <Div>
+                            <Button size='l' stretched onClick={() => calc()}>Вычислить</Button>
+                        </Div>
+                </Group>
+                <Group header={<Header>Результат</Header>}>
+                    <Div>
+                        <Card mode='outline' className="result">
+                            <Div id='result'></Div>
+                        </Card>
+                    </Div>
+                </Group>
         </>
     );
 }
