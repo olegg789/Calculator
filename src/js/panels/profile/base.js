@@ -16,7 +16,7 @@ import {evaluate} from "mathjs";
 
 function ProfilePanelBase({isDesktop, router}) {
 
-    const [setTo] = useState(null)
+    const [to, setTo] = useState(null)
     const [disabled, setDisabled] = useState(true)
     const [start, setStart] = useState(null);
     const textInput = React.createRef();
@@ -58,7 +58,7 @@ function ProfilePanelBase({isDesktop, router}) {
 
     return (
         <>
-            <PanelHeader separator={false}>Конвертор</PanelHeader>
+            <PanelHeader separator={false}>Конвертер</PanelHeader>
             <Div>Позволит перевести из одной единицы измерения в другую</Div>
                 <Group mode='card'>
                     <FormItem top='Физическая величина'>

@@ -37,7 +37,7 @@ function DesktopNavigation({hasHeader, setActiveView, router}) {
             before={<Icon28WriteOutline/>}
             className={router.activeView === 'profile' ? 'activeViewCell' : ''}
           >
-              Конвертор
+              Конвертер
           </Cell>
         </Group>
 

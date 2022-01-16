@@ -32,7 +32,7 @@ function MobailNavigation({setActiveView, router}) {
 			  data-id='profile'
 			  selected={router.activeView === 'profile'}
 			  onClick={openView}
-			  text='Конвертор'
+			  text='Конвертер'
 		  ><Icon28WriteOutline/></TabbarItem>
 	    </Tabbar>
 	)
